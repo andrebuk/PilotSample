@@ -38,28 +38,30 @@ namespace SevMinPilotExt
 
             var selectedItems = context.SelectedObjects;
             //проверяю доступ к файлам
-
+            IRelation relation = selectedItems.First().Relations.First();
+            Guid objectRelationGUID = relation.TargetId;
+            //var objectRelation = objectRelationGUID as Ascon.Pilot.SDK.IDataObject;
             //var files = selectedItems.First().Relations;
-            string path="";
+            string path = "";
             Ascon.Pilot.SDK.IDataObject firstObject = selectedItems.First();
-            if (firstObject.Type.IsMountable)
+            //if (objectRelation.Type.IsMountable)
+            //{
+
+            //    Guid objectGUID = selectedItems.First().Id;
+
+            try
+            {
+                _repository.Mount(objectRelationGUID);
+            }
+            catch (Exception e)
             {
 
-                Guid objectGUID = selectedItems.First().Id;
-
-                try
-                {
-                    _repository.Mount(objectGUID);
-                }
-                catch (Exception e)
-                {
-
-                }
-
-                path = _repository.GetStoragePath(objectGUID);
             }
 
+            path = _repository.GetStoragePath(objectRelationGUID);
+            //}
 
+            string tempValue = "";
             //string MenuName = "Id: " + Info.ToString() + " Пользователь: " + curPersonName;
             string MenuName = "Путь: " + path;
 
