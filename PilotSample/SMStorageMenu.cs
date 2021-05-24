@@ -14,17 +14,17 @@ namespace SevMinPilotExt
     [Export(typeof(IMenu<MainViewContext>))]
     public class SMStorageMenu : IMenu<MainViewContext>
     {
-        
+
         public void Build(IMenuBuilder builder, MainViewContext context)
         {
-            var allItemsInMenu = builder.ItemNames;
-            builder.AddItem("firstItem", (allItemsInMenu.Count())).WithHeader("Привет");
+            //var allItemsInMenu = builder.ItemNames;
+            //builder.AddItem("firstItem", (allItemsInMenu.Count())).WithHeader("Привет");
         }
 
         public void OnMenuItemClick(string name, MainViewContext context)
         {
-            MessageBox.Show("You clicked!");
-            
+            //MessageBox.Show("You clicked!");
+
         }
     }
 }

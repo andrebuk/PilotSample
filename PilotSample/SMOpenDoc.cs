@@ -30,42 +30,61 @@ namespace SevMinPilotExt
 
         public void Build(IMenuBuilder builder, ObjectsViewContext context)
         {
-            //string prefix = "Вы выбрали: ";
-            //string MenuName =  prefix + context.SelectedObjects.First().DisplayName;
+            string prefix = "Вы выбрали: ";
+            //context.SelectedObjects.First().DisplayName;
 
-            IPerson curPerson = _repository.GetCurrentPerson();
-            var curPersonName = curPerson.DisplayName;
+            string MenuName = prefix + context.SelectedObjects.First().Type.Title;
+            //IPerson curPerson = _repository.GetCurrentPerson();
+            //var curPersonName = curPerson.DisplayName;
 
-            var selectedItems = context.SelectedObjects;
+            //var selectedItems = context.SelectedObjects;
             //проверяю доступ к файлам
-            IRelation relation = selectedItems.First().Relations.First();
-            Guid objectRelationGUID = relation.TargetId;
+            //IRelation relation = selectedItems.First().Relations.First();
+            //Guid objectRelationGUID = relation.TargetId;
             //var objectRelation = objectRelationGUID as Ascon.Pilot.SDK.IDataObject;
             //var files = selectedItems.First().Relations;
-            string path = "";
-            Ascon.Pilot.SDK.IDataObject firstObject = selectedItems.First();
+            //string path = "";
+
+            //Ascon.Pilot.SDK.IDataObject firstObject = selectedItems.First();
             //if (objectRelation.Type.IsMountable)
             //{
 
             //    Guid objectGUID = selectedItems.First().Id;
 
-            try
-            {
-                _repository.Mount(objectRelationGUID);
-            }
-            catch (Exception e)
-            {
+            //    try
+            //    {
+            //        _repository.Mount(objectRelationGUID);
+            //    }
+            //    catch (Exception e)
+            //    {
 
-            }
+            //    }
 
-            path = _repository.GetStoragePath(objectRelationGUID);
+            //    path = _repository.GetStoragePath(objectRelationGUID);
             //}
 
-            string tempValue = "";
-            //string MenuName = "Id: " + Info.ToString() + " Пользователь: " + curPersonName;
-            string MenuName = "Путь: " + path;
+            //string tempValue = "";
+            ////string MenuName = "Id: " + Info.ToString() + " Пользователь: " + curPersonName;
+            //string MenuName = "Путь: " + path;
+            //найдем имя текущего объекта
+            string objectName = context.SelectedObjects.First().DisplayName;
+            string objectType = context.SelectedObjects.First().Type.Name;
+            if
+                (objectType == "folder_fo")
+            {
+                
+                fo helpfo = new fo();
+                helpfo.foName = objectName;
+                string foStructure = helpfo.getfoList();
+                //IMenuItemBuilder myitem0= builder.AddItem("FO", 0).WithHeader(foStructure).WithIsEnabled(false);
+                IMenuItemBuilder myitem = builder.AddItem("FO", 0).WithHeader("Состав ФО");
+                IMenuBuilder subMenu = myitem.WithSubmenu();
 
-            builder.AddItem("GetInfo", 0).WithHeader(MenuName);
+                subMenu.AddItem("test", 0).WithHeader(foStructure).WithIsEnabled(false);
+
+            }
+
+
 
             //MessageBox.Show(path,"Alert");
 
