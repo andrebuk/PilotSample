@@ -12,7 +12,7 @@ using System.Windows.Forms;
 namespace SevMinPilotExt
 {
     [Export(typeof(IMenu<MainViewContext>))]
-    public class SMStorageMenu : IMenu<MainViewContext>
+    public class SMMenuStorage : IMenu<MainViewContext>
     {
 
         public void Build(IMenuBuilder builder, MainViewContext context)

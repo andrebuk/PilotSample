@@ -15,14 +15,14 @@ namespace SevMinPilotExt
 {
 
     [Export(typeof(IMenu<ObjectsViewContext>))]
-    public class SMOpenDoc : IMenu<ObjectsViewContext>
+    public class SMMenuBIMContent : IMenu<ObjectsViewContext>
     {
         public string attname = "LinkToDocument";
         private readonly IObjectModifier _modifier;
         private readonly IObjectsRepository _repository;
 
         [ImportingConstructor]
-        public SMOpenDoc(IObjectModifier modifier, IObjectsRepository repository)
+        public SMMenuBIMContent(IObjectModifier modifier, IObjectsRepository repository)
         {
             _modifier = modifier;
             _repository = repository;
@@ -72,7 +72,7 @@ namespace SevMinPilotExt
             if
                 (objectType == "folder_fo")
             {
-                
+
                 fo helpfo = new fo();
                 helpfo.foName = objectName;
                 string foStructure = helpfo.getfoList();
