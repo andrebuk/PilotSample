@@ -33,8 +33,16 @@ namespace SevMinPilotExt
         {
             //счетчик количества добавленных пунктов
             int itemAddedIndex = 0;
+            
+            IEnumerable<Ascon.Pilot.SDK.IDataObject> allSelectedObjects = context.SelectedObjects;
+            Ascon.Pilot.SDK.IDataObject firstSelectedObject = allSelectedObjects.First();
+            //Добавим пункт с названием типа объекта
+            //Найдем название типа первого выбранного объекта
+             builder.AddItem("ObjectTypeTitle", itemAddedIndex).WithHeader(firstSelectedObject.Type.Title);
+            
+            itemAddedIndex = +1;
             //Создаем объект из первого выбранного на момет вызова меню
-            PBObject currentObject = new PBObject(context.SelectedObjects.First(), _repository);
+            PBObject currentObject = new PBObject(firstSelectedObject, _repository);
             pathToRevitFile = currentObject.isRevitFamily();
             //Дополнительное меню для федеральных округов
 
