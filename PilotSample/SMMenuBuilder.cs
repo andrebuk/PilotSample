@@ -105,7 +105,18 @@ namespace SevMinPilotExt
                 //Проверим является ли путь реальным
                 if (Directory.Exists(pathToRevitFile))
                 {
-                    Process.Start("explorer.exe", pathToRevitFile);
+                    //и откроем его в проводнике
+                    //Process.Start("explorer.exe", pathToRevitFile);
+                    Clipboard.SetText(pathToRevitFile);
+                    string clipboardInfo = Clipboard.GetText();
+                    if (clipboardInfo==pathToRevitFile)
+                    {
+                        MessageBox.Show("Путь к файлу скопирован");
+                    }
+                    else
+                    {
+                        MessageBox.Show("в буфере обмена какая то ерунда \n" + clipboardInfo);
+                    }
                 }
 
 

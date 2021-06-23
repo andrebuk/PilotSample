@@ -63,21 +63,22 @@ namespace SevMinPilotExt
                 //    MessageBox.Show(path);
                 //}
 
-                //try
-                //{
-                //    _repository.Mount(_iDataObject.Id);
-                //}
-                //catch (Exception)
-                //{ }
-
+                try
+                {
+                    _repository.Mount(_iDataObject.Id);
+                }
+                catch (Exception)
+                { }
+                //MessageBox.Show("01-" + path);
                 try
                 {
                     path = _repository.GetStoragePath(_iDataObject.Id);
                 }
                 catch (Exception)
                 {
-                    path = null;
+                    path = "Ошибка чтения пути";
                 }
+                //MessageBox.Show("02-" + path);
             }
 
             if (path == null)
