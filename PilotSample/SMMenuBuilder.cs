@@ -21,6 +21,7 @@ namespace SevMinPilotExt
         private readonly IObjectModifier _modifier;
         private readonly IObjectsRepository _repository;
         public string pathToRevitFile;
+        public Ascon.Pilot.SDK.IDataObject firstSelectedObject;
 
         [ImportingConstructor]
         public SMMenuBuilder(IObjectModifier modifier, IObjectsRepository repository)
@@ -31,11 +32,12 @@ namespace SevMinPilotExt
 
         public void Build(IMenuBuilder builder, ObjectsViewContext context)
         {
-            //счетчик количества добавленных пунктов
+
+            //счетчик количества добавленных пунктов. пока считаем что добавляем все свои пункты сверху
             int itemAddedIndex = 0;
             
             IEnumerable<Ascon.Pilot.SDK.IDataObject> allSelectedObjects = context.SelectedObjects;
-            Ascon.Pilot.SDK.IDataObject firstSelectedObject = allSelectedObjects.First();
+            firstSelectedObject = allSelectedObjects.First();
             //Добавим пункт с названием типа объекта
             //Найдем название типа первого выбранного объекта
              builder.AddItem("ObjectTypeTitle", itemAddedIndex).WithHeader(firstSelectedObject.Type.Title);
@@ -43,6 +45,7 @@ namespace SevMinPilotExt
             itemAddedIndex = +1;
             //Создаем объект из первого выбранного на момет вызова меню
             PBObject currentObject = new PBObject(firstSelectedObject, _repository);
+            
             pathToRevitFile = currentObject.isRevitFamily();
             //Дополнительное меню для федеральных округов
 
@@ -61,7 +64,8 @@ namespace SevMinPilotExt
 
             }
 
-
+            builder.AddItem("CreateNewObject", itemAddedIndex).WithHeader("Создать объект");
+            itemAddedIndex = +1;
 
             //Дополнительные меню для ссылки на документацию
             if (currentObject.CanHasAttribute(attLinkToDocumentName))
@@ -97,7 +101,12 @@ namespace SevMinPilotExt
         
         public void OnMenuItemClick(string name, ObjectsViewContext context)
         {
+            if (name == "CreateNewObject")
+            {
+                PBObject objectToCreateObjectIn = new PBObject(firstSelectedObject, _repository,_modifier);
+                objectToCreateObjectIn.TestMethod();
 
+            }
             if (name == "RevitPath")
             {
 
