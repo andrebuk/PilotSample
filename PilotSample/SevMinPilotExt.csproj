@@ -49,10 +49,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="fo.cs" />
-    <Compile Include="PBObject.cs" />
-    <Compile Include="SMMenuBuilder.cs" />
+    <Compile Include="SmFo.cs" />
+    <Compile Include="SmPbObject.cs" />
+    <Compile Include="SmMenuBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SmString.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Icons\" />

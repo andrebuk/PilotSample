@@ -15,8 +15,9 @@ namespace SevMinPilotExt
 {
 
     [Export(typeof(IMenu<ObjectsViewContext>))]
-    public class SMMenuBuilder : IMenu<ObjectsViewContext>
+    public class SmMenuBuilder : IMenu<ObjectsViewContext>
     {
+        //
         public string attLinkToDocumentName = "LinkToDocument";
         private readonly IObjectModifier _modifier;
         private readonly IObjectsRepository _repository;
@@ -24,7 +25,7 @@ namespace SevMinPilotExt
         public Ascon.Pilot.SDK.IDataObject firstSelectedObject;
 
         [ImportingConstructor]
-        public SMMenuBuilder(IObjectModifier modifier, IObjectsRepository repository)
+        public SmMenuBuilder(IObjectModifier modifier, IObjectsRepository repository)
         {
             _modifier = modifier;
             _repository = repository;
@@ -38,15 +39,16 @@ namespace SevMinPilotExt
             
             IEnumerable<Ascon.Pilot.SDK.IDataObject> allSelectedObjects = context.SelectedObjects;
             firstSelectedObject = allSelectedObjects.First();
+            
             //Добавим пункт с названием типа объекта
             //Найдем название типа первого выбранного объекта
              builder.AddItem("ObjectTypeTitle", itemAddedIndex).WithHeader(firstSelectedObject.Type.Title);
             
             itemAddedIndex = +1;
             //Создаем объект из первого выбранного на момет вызова меню
-            PBObject currentObject = new PBObject(firstSelectedObject, _repository);
+            SmPbObject currentObject = new SmPbObject(firstSelectedObject, _repository);
             
-            pathToRevitFile = currentObject.isRevitFamily();
+            pathToRevitFile = currentObject.IsRevitFamily();
             //Дополнительное меню для федеральных округов
 
             //string objectName = context.SelectedObjects.First().DisplayName;
@@ -54,9 +56,9 @@ namespace SevMinPilotExt
             if
                 (currentObject.TypeName() == "folder_fo")
             {
-                fo helpfo = new fo();
+                SmFo helpfo = new SmFo();
                 helpfo.foName = currentObject.DisplayName();
-                string foStructure = helpfo.getfoList();
+                string foStructure = helpfo.GetFoList();
                 IMenuItemBuilder myitem = builder.AddItem("FO", itemAddedIndex).WithHeader("Состав ФО");
                 IMenuBuilder subMenu = myitem.WithSubmenu();
                 subMenu.AddItem("test", 0).WithHeader(foStructure).WithIsEnabled(false);
@@ -103,7 +105,7 @@ namespace SevMinPilotExt
         {
             if (name == "CreateNewObject")
             {
-                PBObject objectToCreateObjectIn = new PBObject(firstSelectedObject, _repository,_modifier);
+                SmPbObject objectToCreateObjectIn = new SmPbObject(firstSelectedObject, _repository,_modifier);
                 objectToCreateObjectIn.TestMethod();
 
             }

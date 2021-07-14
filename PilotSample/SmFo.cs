@@ -6,19 +6,12 @@ using System.Threading.Tasks;
 
 namespace SevMinPilotExt
 {
-    class fo
+    class SmFo
     {
         public string foName;
         
-        //public fo()
-        //{
-        //    this.init();
-        //}
-        //public void init()
-        //{
-        //    foDict.Add("1 - Центральный ", "");
-        //}
-        public string getfoList()
+ 
+        public string GetFoList()
         {
             Dictionary<string, string> foDict = new Dictionary<string, string>();
             foDict.Add("1 - Центральный ", "Белгородская область\nБрянская область\nВладимирская область\nВоронежская область\nИвановская область\nКалужская область\nКостромская область\nКурская область\nЛипецкая область\nОрловская область\nРязанская область\nСмоленская область\nТамбовская область\nТверская область\nТульская область\nЯрославская область");
