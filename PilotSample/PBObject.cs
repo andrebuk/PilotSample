@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using System.Windows.Forms;
 using Ascon.Pilot.SDK;
 
@@ -15,9 +18,10 @@ namespace SevMinPilotExt
         public IObjectsRepository _repository;
         public IObjectModifier _modifier;
 
+        [ImportingConstructor]
 
         public PBObject(Ascon.Pilot.SDK.IDataObject parentObject, IObjectsRepository repository)
-
+         
         {
             _parentObject = parentObject;
             _repository = repository;
@@ -33,20 +37,37 @@ namespace SevMinPilotExt
 
         public void TestMethod()
         {
-
-            IType typeOfNewObject = this.TypeByname("BIMContent");
-            if (typeOfNewObject != null)
+            string[] filesInFolder;
+            
+            IType typeOfNewObject = this.TypeByname("bim_family");
+            using (var fbd = new FolderBrowserDialog())
             {
-                IObjectBuilder testObject =  _modifier.Create(_parentObject, typeOfNewObject);
-                testObject.SetAttribute("name","Тестовый объект");
-                testObject.AddFile(@"C:\Temp\Система ТКП.jpg");
-                _modifier.Apply();
-            }
-            else
-            {
-                MessageBox.Show("Тип не найден");
+                DialogResult result = fbd.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                //if (true)
+                {
+                    filesInFolder = Directory.GetFiles(fbd.SelectedPath);
+                    foreach (string item in filesInFolder)
+                    {
+                        
+                        SMString objectName = new SMString(item);
+
+                        IObjectBuilder objectBuilder = _modifier.Create(_parentObject, typeOfNewObject);
+                        objectBuilder.SetAttribute("name", objectName.Filename());
+                        //objectBuilder.SetAttribute("path", item);
+
+                        objectBuilder.AddFile(item,new MemoryStream(), DateTime.Now, DateTime.Now, DateTime.Now) ;
+                        //Ascon.Pilot.SDK.IDataObject newObject = objectBuilder.DataObject;
+                        _modifier.Apply();
+
+
+                    }
+
+                }
             }
 
+            
 
         }
 
@@ -56,7 +77,7 @@ namespace SevMinPilotExt
             IType result = null;
             foreach (var item in allTypes)
             {
-                
+
                 if (item.Name == typeName)
                 {
                     result = item;
@@ -98,19 +119,6 @@ namespace SevMinPilotExt
             string path = null;
             if (_parentObject.Type.IsMountable)
             {
-                //foreach (IRelation item in _iDataObject.Relations)
-                //{
-                //    try
-                //    {
-                //        path = _repository.GetStoragePath(item.Id);
-                //    }
-                //    catch (Exception e)
-                //    {
-                //        MessageBox.Show(e.ToString());
-                //    }
-                //    MessageBox.Show(path);
-                //}
-
                 try
                 {
                     _repository.Mount(_parentObject.Id);

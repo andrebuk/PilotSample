@@ -38,6 +38,7 @@ namespace SevMinPilotExt
             
             IEnumerable<Ascon.Pilot.SDK.IDataObject> allSelectedObjects = context.SelectedObjects;
             firstSelectedObject = allSelectedObjects.First();
+            
             //Добавим пункт с названием типа объекта
             //Найдем название типа первого выбранного объекта
              builder.AddItem("ObjectTypeTitle", itemAddedIndex).WithHeader(firstSelectedObject.Type.Title);
@@ -47,7 +48,7 @@ namespace SevMinPilotExt
             PBObject currentObject = new PBObject(firstSelectedObject, _repository);
             
             pathToRevitFile = currentObject.isRevitFamily();
-            //Дополнительное меню для федеральных округов
+        
 
             //string objectName = context.SelectedObjects.First().DisplayName;
             string objectType = context.SelectedObjects.First().Type.Name;

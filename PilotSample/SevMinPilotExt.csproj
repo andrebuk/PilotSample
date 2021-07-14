@@ -53,6 +53,7 @@
     <Compile Include="PBObject.cs" />
     <Compile Include="SMMenuBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SMString.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Icons\" />

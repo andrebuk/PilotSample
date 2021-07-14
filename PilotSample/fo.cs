@@ -10,14 +10,7 @@ namespace SevMinPilotExt
     {
         public string foName;
         
-        //public fo()
-        //{
-        //    this.init();
-        //}
-        //public void init()
-        //{
-        //    foDict.Add("1 - Центральный ", "");
-        //}
+       
         public string getfoList()
         {
             Dictionary<string, string> foDict = new Dictionary<string, string>();
