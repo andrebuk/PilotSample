@@ -8,20 +8,26 @@ using System.IO;
 
 namespace SevMinPilotExt
 {
-    class SMString
+    class SmString
     {
         public string _string;
 
 
-        public SMString(string initString)
+        public SmString(string initString)
         {
             _string = initString;
         }
-        public string Filename()
+        public string FileName()
         {
 
             string fullFilename = Path.GetFileName(_string);
             return fullFilename.Substring(0, fullFilename.Length - 4);
+        }
+        public string FullFileName()
+        {
+
+            string fullFilename = Path.GetFileName(_string);
+            return fullFilename;
         }
     }
 }

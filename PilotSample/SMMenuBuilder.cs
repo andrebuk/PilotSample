@@ -106,7 +106,7 @@ namespace SevMinPilotExt
             if (name == "CreateNewObject")
             {
                 SmPbObject objectToCreateObjectIn = new SmPbObject(firstSelectedObject, _repository,_modifier);
-                objectToCreateObjectIn.TestMethod();
+                objectToCreateObjectIn.CreateObjectsFormFiles();
 
             }
             if (name == "RevitPath")

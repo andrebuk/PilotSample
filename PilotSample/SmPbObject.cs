@@ -35,10 +35,11 @@ namespace SevMinPilotExt
             _modifier = modifier;
         }
 
-        public void TestMethod()
+        public void CreateObjectsFormFiles()
         {
             string[] filesInFolder;
-            IType typeOfNewObject = this.TypeByname("bim_family");
+            IType typeOfObject = this.TypeByname("Семейство");
+            IType typeOfFileObject = this.TypeByname("Файл");
 
 
 
@@ -48,27 +49,28 @@ namespace SevMinPilotExt
                 DialogResult result = fbd.ShowDialog();
 
                 if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-                //if (true)
+            
                 {
                     filesInFolder = Directory.GetFiles(fbd.SelectedPath);
                     foreach (string item in filesInFolder)
                     {
-                        //using (FileStream stream = File.OpenRead(item))
-                        //{
-                        SmString objectName = new SmString(item);
+                        using (FileStream stream = File.OpenRead(item))
+                        {
+                            SmString objectName = new SmString(item);
 
-                        IObjectBuilder objectBuilder = _modifier.Create(_parentObject, typeOfNewObject);
+                        IObjectBuilder objectBuilder = _modifier.Create(_parentObject, typeOfObject);
                         objectBuilder.SetAttribute("name", objectName.FileName());
 
-                       
-                        //objectBuilder.SetAttribute("path", item);
-
-                        objectBuilder.AddFile(item,new MemoryStream(), DateTime.Now, DateTime.Now, DateTime.Now) ;
                         Ascon.Pilot.SDK.IDataObject newObject = objectBuilder.DataObject;
                         _modifier.Apply();
-                       
+                        //добавим объект типа File для того чтобы потом добавить к нему собственно файл
 
-                        //}
+                        IObjectBuilder fileObjectBuilder = _modifier.Create(newObject, typeOfFileObject);
+                        fileObjectBuilder.SetAttribute("Title 4C281306-E329-423A-AF45-7B39EC30273F", objectName.FullFileName());
+                        fileObjectBuilder.AddFile(item, stream, DateTime.Now, DateTime.Now, DateTime.Now);
+                        _modifier.Apply();
+
+                        }
 
                     }
 
@@ -86,8 +88,9 @@ namespace SevMinPilotExt
             foreach (var item in allTypes)
             {
 
-                if (item.Name == typeName)
+                if (item.Title == typeName)
                 {
+                    
                     result = item;
                     break;
 
