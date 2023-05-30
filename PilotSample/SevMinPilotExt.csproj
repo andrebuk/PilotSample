@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\..\AppData\Local\ASCON\Pilot-BIM\Development\</OutputPath>
+    <OutputPath>..\..\..\..\..\AppData\Local\ASCON\Pilot-ICE Enterprise\Development\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -55,6 +55,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PIObject.cs" />
     <Compile Include="SmFo.cs" />
     <Compile Include="SmPbObject.cs" />
     <Compile Include="SmMenuBuilder.cs" />

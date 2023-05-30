@@ -66,7 +66,7 @@ namespace SevMinPilotExt
                         //добавим объект типа File для того чтобы потом добавить к нему собственно файл
 
                         IObjectBuilder fileObjectBuilder = _modifier.Create(newObject, typeOfFileObject);
-                        fileObjectBuilder.SetAttribute("Title 4C281306-E329-423A-AF45-7B39EC30273F", objectName.FullFileName());
+                        fileObjectBuilder.SetAttribute("Title 4C281306-E329-423A-AF45-7B39EC30273F", objectName.FileName());
                         fileObjectBuilder.AddFile(item, stream, DateTime.Now, DateTime.Now, DateTime.Now);
                         _modifier.Apply();
 

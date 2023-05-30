@@ -42,7 +42,7 @@ namespace SevMinPilotExt
             
             //Добавим пункт с названием типа объекта
             //Найдем название типа первого выбранного объекта
-             builder.AddItem("ObjectTypeTitle", itemAddedIndex).WithHeader(firstSelectedObject.Type.Title);
+             builder.AddItem("ObjectTypeTitle", itemAddedIndex).WithHeader(firstSelectedObject.Type.Name);
             
             itemAddedIndex = +1;
             //Создаем объект из первого выбранного на момет вызова меню
@@ -66,30 +66,30 @@ namespace SevMinPilotExt
 
             }
 
-            builder.AddItem("CreateNewObject", itemAddedIndex).WithHeader("Создать объект");
-            itemAddedIndex = +1;
+            //builder.AddItem("CreateNewObject", itemAddedIndex).WithHeader("Создать объект");
+            //itemAddedIndex = +1;
 
             //Дополнительные меню для ссылки на документацию
-            if (currentObject.CanHasAttribute(attLinkToDocumentName))
-            {
-                builder.AddItem("CreateDocumentsLink", itemAddedIndex).WithHeader("Привязать документацию");
-                itemAddedIndex = +1;
-            }
-            if (currentObject.HasAttribute(attLinkToDocumentName))
-            {
-                builder.AddItem("OpenDocuments", itemAddedIndex).WithHeader("Открыть документацию");
-                itemAddedIndex = +1;
-            }
-            if (pathToRevitFile != "")
-            {
-                builder.AddItem("RevitPath", itemAddedIndex).WithHeader(pathToRevitFile);
-                itemAddedIndex = +1;
-            }
-            else
-            {
-                builder.AddItem("None", itemAddedIndex).WithHeader("Это не семейство Revit");
-                itemAddedIndex = +1;
-            }
+            //if (currentObject.CanHasAttribute(attLinkToDocumentName))
+            //{
+            //    builder.AddItem("CreateDocumentsLink", itemAddedIndex).WithHeader("Привязать документацию");
+            //    itemAddedIndex = +1;
+            //}
+            //if (currentObject.HasAttribute(attLinkToDocumentName))
+            //{
+            //    builder.AddItem("OpenDocuments", itemAddedIndex).WithHeader("Открыть документацию");
+            //    itemAddedIndex = +1;
+            //}
+            //if (pathToRevitFile != "")
+            //{
+            //    builder.AddItem("RevitPath", itemAddedIndex).WithHeader(pathToRevitFile);
+            //    itemAddedIndex = +1;
+            //}
+            //else
+            //{
+            //    builder.AddItem("None", itemAddedIndex).WithHeader("Это не семейство Revit");
+            //    itemAddedIndex = +1;
+            //}
 
         }
             //дополнительное меню для работы с Семейством Revit
