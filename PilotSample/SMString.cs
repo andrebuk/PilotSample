@@ -18,16 +18,13 @@ namespace SevMinPilotExt
             _string = initString;
         }
         public string FileName()
+
         {
 
             string fullFilename = Path.GetFileName(_string);
+
+
             return fullFilename.Substring(0, fullFilename.Length - 4);
-        }
-        public string FullFileName()
-        {
-
-            string fullFilename = Path.GetFileName(_string);
-            return fullFilename;
         }
     }
 }

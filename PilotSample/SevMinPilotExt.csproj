@@ -31,11 +31,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ascon.Pilot.SDK, Version=21.1.0.35536, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ascon.Pilot.SDK.21.1.0\lib\net40-Client\Ascon.Pilot.SDK.dll</HintPath>
+    <Reference Include="Ascon.Pilot.Core">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\Pilot-ICE Enterprise\Ascon.Pilot.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Ascon.Pilot.Theme, Version=21.1.0.35536, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Ascon.Pilot.SDK.21.1.0\lib\net40-Client\Ascon.Pilot.Theme.dll</HintPath>
+    <Reference Include="Ascon.Pilot.DataClasses">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\Pilot-ICE Enterprise\Ascon.Pilot.DataClasses.dll</HintPath>
+    </Reference>
+    <Reference Include="Ascon.Pilot.DataModifier">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\Pilot-ICE Enterprise\Ascon.Pilot.DataModifier.dll</HintPath>
+    </Reference>
+    <Reference Include="Ascon.Pilot.SDK">
+      <HintPath>..\..\..\..\..\..\..\Program Files\ASCON\Pilot-ICE Enterprise\Ascon.Pilot.SDK.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
