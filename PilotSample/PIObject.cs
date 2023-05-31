@@ -19,7 +19,7 @@ namespace SevMinPilotExt
         public bool Handle(IAttributeModifier modifier, ObjectCardContext context)
         {
             //
-            Guid parentObject = context.Parent;
+            IDataObject parentObject = context.Parent;
             String parentName = parentObject.ToString();
             var isObjectModification = context.EditiedObject != null;
             if (isObjectModification || context.IsReadOnly)
